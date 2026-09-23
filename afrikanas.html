@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Afrikanas — Tailored Heritage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,560;1,9..144,450&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#EDE6D6;
+    --ink-dim:#B9AF9B;
+    --ground:#15120E;
+    --ground-raised:#1C1712;
+    --gold:#B0863C;
+    --gold-soft:#8A6A30;
+    --indigo:#333F5C;
+    --line:#3A322A;
+    box-sizing:border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *,*::before,*::after{box-sizing:inherit;}
+  html{scroll-behavior:smooth; scroll-padding-top: env(safe-area-inset-top, 0px);}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:450;
+    line-height:1.05;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  p{ margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 clamp(20px, 5vw, 64px);
+  }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky;
+    top:0;
+    padding-top: env(safe-area-inset-top, 0px);
+    z-index:20;
+    background:rgba(21,18,14,0.86);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px clamp(20px, 5vw, 64px);
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .brand{
+    font-family:'Fraunces', serif;
+    font-size:1.35rem;
+    font-weight:560;
+    letter-spacing:0.02em;
+  }
+  .navlinks{
+    display:flex;
+    gap:clamp(18px, 3vw, 40px);
+    font-size:0.92rem;
+    color:var(--ink-dim);
+  }
+  .navlinks a{ transition:color .2s ease; }
+  .navlinks a:hover, .navlinks a:focus-visible{ color:var(--ink); }
+  .nav-cta{
+    font-size:0.85rem;
+    padding:9px 18px;
+    border:1px solid var(--gold-soft);
+    color:var(--gold);
+    white-space:nowrap;
+  }
+  .nav-cta:hover, .nav-cta:focus-visible{ background:var(--gold); color:var(--ground); border-color:var(--gold); }
+  .navlinks-mobile{ display:none; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:clamp(64px, 11vw, 130px) 0 clamp(50px, 8vw, 90px);
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:clamp(32px, 6vw, 70px);
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.5rem, 5.3vw, 4.4rem);
+    max-width:11ch;
+  }
+  .hero .lede{
+    margin-top:26px;
+    max-width:46ch;
+    font-size:1.08rem;
+    line-height:1.65;
+    color:var(--ink-dim);
+  }
+  .hero-actions{
+    margin-top:38px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--gold);
+    color:#171310;
+    padding:14px 26px;
+    font-size:0.92rem;
+    border:1px solid var(--gold);
+  }
+  .btn-primary:hover, .btn-primary:focus-visible{ background:transparent; color:var(--gold); }
+  .btn-secondary{
+    padding:14px 26px;
+    font-size:0.92rem;
+    border:1px solid var(--line);
+    color:var(--ink-dim);
+  }
+  .btn-secondary:hover, .btn-secondary:focus-visible{ border-color:var(--ink-dim); color:var(--ink); }
+
+  .hero-art{ width:100%; }
+  .hero-art svg{ width:100%; height:auto; }
+
+  /* ---------- Marquee strip ---------- */
+  .strip{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:16px 0;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:0.98rem;
+    color:var(--ink-dim);
+  }
+  .strip .wrap{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px 24px;
+  }
+
+  /* ---------- Philosophy ---------- */
+  .philosophy{
+    padding:clamp(80px, 11vw, 140px) 0;
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:clamp(30px, 6vw, 80px);
+  }
+  .philosophy .kicker{
+    font-size:0.9rem;
+    color:var(--gold);
+    margin-bottom:18px;
+  }
+  .philosophy h2{
+    font-size:clamp(1.8rem, 3.2vw, 2.6rem);
+    max-width:14ch;
+  }
+  .philosophy-copy p{
+    font-size:1.02rem;
+    line-height:1.75;
+    color:var(--ink-dim);
+    max-width:58ch;
+  }
+  .philosophy-copy p + p{ margin-top:20px; }
+  .philosophy-copy .quote{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.35rem;
+    line-height:1.5;
+    color:var(--ink);
+    margin-top:32px;
+    padding-left:22px;
+    border-left:1px solid var(--gold-soft);
+    max-width:42ch;
+  }
+
+  /* ---------- Collection ---------- */
+  .collection{ padding:clamp(60px, 9vw, 100px) 0 clamp(90px, 11vw, 140px); }
+  .collection > .wrap > .kicker{
+    font-size:0.9rem;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  .collection h2{
+    font-size:clamp(1.8rem, 3.2vw, 2.6rem);
+    margin-bottom:clamp(40px, 6vw, 64px);
+    max-width:16ch;
+  }
+  .garment{
+    display:grid;
+    grid-template-columns:140px 1fr auto;
+    align-items:center;
+    gap:clamp(20px, 4vw, 48px);
+    padding:30px 0;
+    border-top:1px solid var(--line);
+  }
+  .collection .garment:last-child{ border-bottom:1px solid var(--line); }
+  .garment svg{ width:100%; height:auto; color:var(--ink-dim); }
+  .garment-name{
+    font-size:clamp(1.3rem, 2.4vw, 1.7rem);
+  }
+  .garment-desc{
+    color:var(--ink-dim);
+    font-size:0.96rem;
+    line-height:1.6;
+    max-width:48ch;
+    margin-top:8px;
+  }
+  .garment-price{
+    text-align:right;
+    white-space:nowrap;
+    font-size:0.95rem;
+    color:var(--ink-dim);
+  }
+  .garment-price span{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-size:1.15rem;
+    color:var(--ink);
+    margin-top:4px;
+  }
+
+  /* ---------- Bespoke ---------- */
+  .bespoke{
+    background:var(--ground-raised);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:clamp(80px, 11vw, 140px) 0;
+  }
+  .bespoke .wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:clamp(30px, 6vw, 80px);
+    align-items:start;
+  }
+  .bespoke .kicker{ font-size:0.9rem; color:var(--gold); margin-bottom:18px; }
+  .bespoke h2{ font-size:clamp(1.8rem, 3.2vw, 2.6rem); max-width:13ch; }
+  .steps{ margin-top:8px; }
+  .step{
+    display:grid;
+    grid-template-columns:2.4em 1fr;
+    gap:18px;
+    padding:20px 0;
+    border-top:1px solid var(--line);
+  }
+  .steps .step:last-child{ border-bottom:1px solid var(--line); }
+  .step-mark{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--gold);
+    font-size:1.1rem;
+  }
+  .step-title{ font-size:1.05rem; margin-bottom:6px; }
+  .step-text{ color:var(--ink-dim); font-size:0.95rem; line-height:1.6; max-width:46ch; }
+
+  /* ---------- Contact / footer ---------- */
+  .contact{
+    padding:clamp(80px, 11vw, 140px) 0 clamp(50px, 7vw, 80px);
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:clamp(30px, 6vw, 80px);
+  }
+  .contact h2{
+    font-size:clamp(1.9rem, 3.6vw, 3rem);
+    max-width:12ch;
+  }
+  .contact .lede{
+    margin-top:20px;
+    color:var(--ink-dim);
+    font-size:1.02rem;
+    line-height:1.7;
+    max-width:44ch;
+  }
+  .contact form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .field label{ font-size:0.85rem; color:var(--ink-dim); }
+  .field input, .field select, .field textarea{
+    background:transparent;
+    border:none;
+    border-bottom:1px solid var(--line);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-size:1rem;
+    padding:10px 2px;
+  }
+  .field select option{ background:var(--ground); color: var(--ink); }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none;
+    border-color:var(--gold);
+  }
+  .field textarea{ resize:vertical; min-height:70px; font-family:'Work Sans', sans-serif; }
+  .contact .btn-primary{ align-self:flex-start; margin-top:8px; border-radius:0; cursor:pointer; }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:30px 0 calc(30px + env(safe-area-inset-bottom, 0px));
+  }
+  footer .wrap{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+    font-size:0.85rem;
+    color:var(--ink-dim);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px){
+    .hero{ grid-template-columns:1fr; }
+    .hero-art{ order:-1; max-width:280px; margin:0 auto; }
+    .philosophy{ grid-template-columns:1fr; }
+    .bespoke .wrap{ grid-template-columns:1fr; }
+    .contact{ grid-template-columns:1fr; }
+    .garment{ grid-template-columns:80px 1fr; }
+    .garment-price{ grid-column:1 / -1; text-align:left; display:flex; gap:8px; align-items:baseline; }
+    .garment-price span{ margin-top:0; }
+    .navlinks{ display:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="brand" href="#top">Afrikanas</a>
+    <div class="navlinks">
+      <a href="#collection">Collection</a>
+      <a href="#philosophy">Atelier</a>
+      <a href="#bespoke">Bespoke</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="#contact">Request an appointment</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero wrap">
+    <div>
+      <h1>Cloth cut for those who move rooms.</h1>
+      <p class="lede">Afrikanas is a made-to-measure house working in East African cotton, hand-finished wool, and quiet detail. Each piece is built once, for one body, and worn for decades.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#contact">Request a private fitting</a>
+        <a class="btn-secondary" href="#collection">View the collection</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 320 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M110 60 L130 40 L160 52 L190 40 L210 60 L235 95 L212 115 L200 100 L200 340 L120 340 L120 100 L108 115 L85 95 Z" stroke="var(--gold)" stroke-width="1.3"/>
+        <path d="M130 40 L160 75 L190 40" stroke="var(--gold)" stroke-width="1.3"/>
+        <line x1="160" y1="80" x2="160" y2="340" stroke="var(--line)" stroke-width="1"/>
+        <circle cx="160" cy="120" r="2" fill="var(--gold)"/>
+        <circle cx="160" cy="150" r="2" fill="var(--gold)"/>
+        <circle cx="160" cy="180" r="2" fill="var(--gold)"/>
+      </svg>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <span>Nairobi atelier, by appointment only</span>
+      <span>Made-to-measure, 6–10 weeks</span>
+      <span>Housed in East African cotton and Biella wool</span>
+    </div>
+  </div>
+
+  <section class="philosophy wrap" id="philosophy">
+    <div>
+      <p class="kicker">The atelier</p>
+      <h2>Heritage, cut to the individual.</h2>
+    </div>
+    <div class="philosophy-copy">
+      <p>Afrikanas was founded on a simple premise: that the tailoring traditions of East Africa — hand-loomed cotton, considered proportion, cloth built for warmth and movement — belong in the same room as Savile Row and Naples.</p>
+      <p>Every commission begins with a conversation, not a size chart. Our cutters study how a client stands, sits, and travels before a single pattern is drawn. The result is a garment that disappears on the body, doing its work without asking to be noticed.</p>
+      <p class="quote">"We are not dressing an occasion. We are dressing a life that repeats itself, differently, every day."</p>
+    </div>
+  </section>
+
+  <section class="collection wrap" id="collection">
+    <p class="kicker">The collection</p>
+    <h2>Four garments, held to one standard.</h2>
+
+    <div class="garment">
+      <svg viewBox="0 0 100 120" fill="none"><path d="M30 15 L40 8 L50 14 L60 8 L70 15 L82 30 L70 40 L64 33 L64 105 L36 105 L36 33 L30 40 L18 30 Z" stroke="currentColor" stroke-width="1.1"/></svg>
+      <div>
+        <p class="garment-name">The Signature Shirt</p>
+        <p class="garment-desc">Two-fold East African cotton, hand-finished collar, mother-of-pearl buttons. Cut fully to measure, in nine collar styles.</p>
+      </div>
+      <p class="garment-price">Made to measure<span>From $480</span></p>
+    </div>
+
+    <div class="garment">
+      <svg viewBox="0 0 100 120" fill="none"><path d="M50 8 C58 8 63 13 63 20 L63 45 L78 108 L58 108 L52 55 L48 55 L42 108 L22 108 L37 45 L37 20 C37 13 42 8 50 8 Z" stroke="currentColor" stroke-width="1.1"/></svg>
+      <div>
+        <p class="garment-name">The Tailored Trouser</p>
+        <p class="garment-desc">High-rise, self-lined through the seat and thigh, finished with a hand-picked waistband. Available in wool, cotton twill, or linen.</p>
+      </div>
+      <p class="garment-price">Made to measure<span>From $620</span></p>
+    </div>
+
+    <div class="garment">
+      <svg viewBox="0 0 100 120" fill="none"><path d="M28 18 L42 8 L50 16 L58 8 L72 18 L86 34 L72 46 L64 37 L64 108 L36 108 L36 37 L28 46 L14 34 Z" stroke="currentColor" stroke-width="1.1"/></svg>
+      <div>
+        <p class="garment-name">The Bespoke Suit</p>
+        <p class="garment-desc">Full canvas construction, hand-padded lapels, cloth sourced from Biella and Huddersfield. Two fittings, then a lifetime of adjustment.</p>
+      </div>
+      <p class="garment-price">Bespoke<span>From $2,400</span></p>
+    </div>
+
+    <div class="garment">
+      <svg viewBox="0 0 100 120" fill="none"><path d="M32 14 L44 8 L50 13 L56 8 L68 14 L80 28 L68 38 L62 32 L62 105 L38 105 L38 32 L32 38 L20 28 Z" stroke="currentColor" stroke-width="1.1"/></svg>
+      <div>
+        <p class="garment-name">The Essential Tee</p>
+        <p class="garment-desc">Heavyweight combed cotton, garment-dyed and pre-shrunk, finished with a reinforced collar built to outlast the season.</p>
+      </div>
+      <p class="garment-price">Made to order<span>From $210</span></p>
+    </div>
+  </section>
+
+  <section class="bespoke" id="bespoke">
+    <div class="wrap">
+      <div>
+        <p class="kicker">Bespoke process</p>
+        <h2>From first measure to final press.</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="step-mark">i</span>
+          <div>
+            <p class="step-title">Consultation</p>
+            <p class="step-text">A private sitting at our Nairobi atelier or your residence, to discuss cloth, cut, and how the garment should live in your wardrobe.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-mark">ii</span>
+          <div>
+            <p class="step-title">Pattern and first fitting</p>
+            <p class="step-text">Your pattern is drafted by hand and cut in a basted trial garment, fitted and marked for adjustment.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-mark">iii</span>
+          <div>
+            <p class="step-title">Construction</p>
+            <p class="step-text">Full hand-finishing over six to ten weeks, with a second fitting for suits and outerwear.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-mark">iv</span>
+          <div>
+            <p class="step-title">Delivery and after-care</p>
+            <p class="step-text">Delivered by hand where possible, with complimentary adjustments for the life of the garment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact wrap" id="contact">
+    <div>
+      <h2>Request a private appointment.</h2>
+      <p class="lede">Appointments are held at our Nairobi atelier, or arranged for your home or office in select cities. Tell us a little about what you're looking for and a member of the house will reply within one business day.</p>
+    </div>
+    <form onsubmit="event.preventDefault(); this.querySelector('.confirm').style.display='block';">
+      <div class="field">
+        <label for="name">Full name</label>
+        <input id="name" type="text" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" required>
+      </div>
+      <div class="field">
+        <label for="interest">Interest</label>
+        <select id="interest">
+          <option>Bespoke suit</option>
+          <option>Made-to-measure shirts</option>
+          <option>Trousers</option>
+          <option>Full wardrobe consultation</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="notes">Notes</label>
+        <textarea id="notes" placeholder="Preferred city and dates, if known"></textarea>
+      </div>
+      <button class="btn-primary" type="submit">Request appointment</button>
+      <p class="confirm" style="display:none; color:var(--gold); font-size:0.9rem;">Thank you — the house will be in touch shortly.</p>
+    </form>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Afrikanas — Nairobi, Kenya</span>
+    <span>By appointment · atelier@afrikanas.example</span>
+  </div>
+</footer>
+
+</body>
+</html>
